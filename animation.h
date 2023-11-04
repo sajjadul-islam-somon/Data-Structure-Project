@@ -5,10 +5,7 @@
 #define animation
 
 using namespace std;
-#define fastio                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
-
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 void gotoxy(short x, short y)
 {

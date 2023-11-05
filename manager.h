@@ -193,18 +193,22 @@ void modifyProduct()
                 cout << left;
                 cout << setw(15) << temp->proId << setw(30) << temp->proName << setw(15) << temp->proPrice << setw(10) << temp->proNum << endl;
 
-                gotoxy(20, 13);
+                gotoxy(25, 13);
                 cout << "Enter Modify Product Info : \n";
+                gotoxy(30, 14);
                 cout << "New Product ID       : ";
                 cin >> temp->proId;
+                gotoxy(30, 15);
                 cout << "New Product Name     : ";
                 cin.ignore();
                 getline(cin, temp->proName);
+                gotoxy(30, 16);
                 cout << "New Product Price    : ";
                 cin >> temp->proPrice;
+                gotoxy(30, 17);
                 cout << "New Product Quantity : ";
                 cin >> temp->proNum;
-                gotoxy(20, 19);
+                gotoxy(30, 19);
                 cout << "Product \" " << temp->proName << " \" is modified" << endl;
 
                 saveAllProductToFile();

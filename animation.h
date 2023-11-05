@@ -15,7 +15,7 @@ void gotoxy(short x, short y)
 
 void loadingBar()
 {
-    //loading border up-down
+    //loading border top-bottom
     for (int x = 25; x < 65; x++)
     {
         gotoxy(x, 17);
@@ -42,26 +42,32 @@ void loadingBar()
     gotoxy(65, 19);
     printf("%c", 188);
 
+    for (int i = 26; i < 65; i++)                   //fill the box with light-shade
+    {
+        gotoxy(i, 18);
+        printf("%c", 176);
+    }
+
     for (int percent = 0; percent <= 100; percent++)
     {
         int loadStart = 25 + 1;                     //start filling form here
         int length = (65 - 25) - 1;                 //length of empty area in the loading border
 
         int barLength = ((length) * percent) / 100; // Calculate the number of characters to fill based on the percentage
-        for (int i = 0; i < barLength; i++)
+        for (int i = 0; i < barLength; i++)         //fill the box with box
         {
             gotoxy(loadStart + i, 18);
-            printf("%c", 178);
+            printf("%c", 219);
         }
         gotoxy(35, 20);
         cout << "Loading . . . " << percent << " %";
-        Sleep(35);
+        Sleep(20);
         // Clear any remaining characters in the loading bar
-        for (int i = barLength; i < length; i++)
-        {
-            gotoxy(loadStart + i, 18);
-            printf(" ");
-        }
+        // for (int i = barLength; i < length; i++)
+        // {
+        //     gotoxy(loadStart + i, 18);
+        //     printf(" ");
+        // }
     }
 }
 

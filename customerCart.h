@@ -44,8 +44,8 @@ void cCart()
     cout << "\t\t\t\t    _______/         " << endl;
     cout << "\t\t\t\t     O   O           " << endl;
 
-    gotoxy(25, 11);
-    cout << "Please Grab a Cart \\_/`\n\n";
+    gotoxy(35, 11);
+    cout << "Please Grab a Cart \\_/`";
 
     cart *temp = top;
 
@@ -56,34 +56,52 @@ void cCart()
     }
     else
     {
-        gotoxy(25, 13);
+        gotoxy(35, 13);
         cout << "Your Cart Number is : " << top->num << endl;
         top = top->link;
         top->link = nullptr;
         delete temp;
     }
-    gotoxy(20, 21);
+    gotoxy(30, 21);
     system("pause");
     system("cls");
 }
 
 void displayCart()
 {
+    system("cls");
+
+    gotoxy(15, 2);
+    cout << "+---------------------------------------------------------------+";
+    gotoxy(15, 3);
+    cout << "|                         Display Cart                          |";
+    gotoxy(15, 4);
+    cout << "+---------------------------------------------------------------+";
     cart *temp = top;
 
     if (top == nullptr)
     {
+        gotoxy(35, 7);
         cout << "Carts Not Available Now" << endl; // Stack Underflow
     }
     else
     {
-        while (temp != nullptr)
+        gotoxy(25, 7);
+        cout << "Existing carts are : ";
+        int xPos = 30, yPos = 9;
+        for (int i = 0; temp != nullptr; i++)
         {
-            cout << temp->num << " ";
+            if (i == 10 || i == 20 || i == 30 || i == 40 || i == 50)
+            {
+                xPos += 8;
+                yPos -= 10;
+            }
+            gotoxy(xPos, yPos + i);
+            cout << temp->num;
             temp = temp->link;
         }
     }
-    gotoxy(20, 21);
+    gotoxy(30, 21);
     system("pause");
     system("cls");
 }
@@ -127,7 +145,7 @@ void searchProduct()
         gotoxy(25, 10);
         cout << "Product Not Found . . . \n";
     }
-    gotoxy(25, 20);
+    gotoxy(30, 20);
     system("pause");
     system("cls");
 }
@@ -227,7 +245,7 @@ void buyProduct()
         totalBill = bill * (0.90); // 10% Discount
         cout << "\t\t\tTotal sum of Bill : " << bill << endl;
         cout << "\t\t\tWith 10% Discount. Your Payable Bill is : " << totalBill << endl << endl;
-        cout << "\t\t\t\tThank you for shopping here" << endl;
+        cout << "\t\t\t\tThank you for shopping here\n\n";
         enqueue(customerName, totalBill);
     }
     system("pause");

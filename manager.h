@@ -105,7 +105,7 @@ void addProduct()
     }
     gotoxy(25, 14);
     cout << "Product \"" << newNode->proName << "\" is added Successfully";
-    gotoxy(25, 21);
+    gotoxy(30, 21);
     system("pause");
     system("cls");
 }
@@ -151,8 +151,8 @@ void displayProduct()
         }
         gotoxy(12, yPos);
         cout << "______________________________________________________________________\n";
-        cout << "\t\t\tTotal Products in our Store : " << totalProduct << endl
-             << endl;
+        gotoxy(30, yPos + 1);
+        cout << "Total Products in our Store : " << totalProduct << endl << endl;
     }
 }
 
@@ -223,7 +223,7 @@ void modifyProduct()
             cout << "No Product Found";
         }
     }
-    gotoxy(25, 21);
+    gotoxy(30, 21);
     system("pause");
     system("cls");
 }
@@ -252,11 +252,13 @@ void deleteProduct()
         gotoxy(20, 7);
         cout << "Enter Product's ID : ";
         cin >> id;
+        bool idExist = false;
 
         while (temp != nullptr)
         {
             if (temp->proId == id)
             {
+                idExist = true;
                 gotoxy(12, 9);
                 cout << left;
                 cout << setw(15) << "Product ID" << setw(30) << "Product Name" << setw(15) << "Price" << setw(10) << "Quantity" << endl;
@@ -266,19 +268,23 @@ void deleteProduct()
                 cout << left;
                 cout << setw(15) << temp->proId << setw(30) << temp->proName << setw(15) << temp->proPrice << setw(10) << temp->proNum << endl;
                 gotoxy(25, 13);
-                cout << "Are sure!!! You want to delete" << temp->proName << endl;
-                gotoxy(25, 21);
+                cout << "Are sure!!! You want to delete \" " << temp->proName << " \" \n";
+                gotoxy(30, 21);
                 system("pause");
                 break;
             }
             temp = temp->next;
         }
-
+        if (!idExist)
+        {
+            gotoxy(30, 17);
+            cout << "Product ID \" " << id << " \" is Not Found\n";
+        }
         temp = head;
         if (head->proId == id)
         {
             gotoxy(25, 17);
-            cout << "Product \" " << head->proName << " \" is deleted Successfully" << endl;
+            cout << "Product \" " << head->proName << " \" is deleted Successfully\n";
             head = head->next;
             delete temp;
         }
@@ -289,7 +295,7 @@ void deleteProduct()
                 if (temp->proId == id)
                 {
                     gotoxy(25, 17);
-                    cout << "Product \" " << temp->proName << " \" is deleted Successfully" << endl;
+                    cout << "Product \" " << temp->proName << " \" is deleted Successfully\n";
                     prev->next = temp->next;
                     delete temp;
                     break;
@@ -301,7 +307,7 @@ void deleteProduct()
     }
     saveAllProductToFile();
     loadProductFromFile();
-    gotoxy(25, 21);
+    gotoxy(30, 21);
     system("pause");
     system("cls");
 }

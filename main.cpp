@@ -203,7 +203,7 @@ void Login()
         cout << "Wrong Username or Password . . .\n\n";
         gotoxy(30, 15);
         cout << "Your entered Password :  " << password << endl;
-        gotoxy(25, 20);
+        gotoxy(30, 20);
         system("pause");
         Login();
     }
@@ -254,7 +254,7 @@ int main()
     gotoxy(15, 13);
     cout << "                   Akib Mahmud          (4881)" << endl;
 
-    gotoxy(25, 20);
+    gotoxy(30, 20);
     system("pause");
     system("cls");
 

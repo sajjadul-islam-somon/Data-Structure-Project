@@ -227,14 +227,20 @@ int main()
     loadProductFromFile();
     loadCustomerFromFile();
 
-    cout << endl;
-    cout << endl;
     gotoxy(15, 4);
     cout << "+===============================================================+";
     gotoxy(15, 5);
-    cout << "|                         Shoping Mall                          |";
+    cout << "|                                                               |";
     gotoxy(15, 6);
     cout << "+===============================================================+";
+
+    char headline[64] = "                         Shoping Mall                          ";
+    gotoxy(16, 5);
+    for (int i = 0; i < 64; i++)
+    {
+        Sleep(30);
+        cout << headline[i];
+    }
 
     gotoxy(15, 8);
     cout << "                     Data Structure Project";

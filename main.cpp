@@ -194,8 +194,7 @@ void Login()
     {
         gotoxy(30, 14);
         cout << "Login Susscessfull . . .\n";
-        gotoxy(25, 17);
-        system("pause");
+        loadingBar();
         Manager();
     }
     else 

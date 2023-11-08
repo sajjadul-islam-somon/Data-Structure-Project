@@ -374,16 +374,16 @@ void loadProductFromFile()
                 continue;
             }
             istringstream ss(line);
-            string s1, s2, s3, s4;
-            if (getline(ss, s1, ',') && getline(ss, s2, ',') && getline(ss, s3, ',') && getline(ss, s4, ','))
+            string sid, sname, sprice, snum;
+            if (getline(ss, sid, ',') && getline(ss, sname, ',') && getline(ss, sprice, ',') && getline(ss, snum))
             {
-                int i1, i4;
-                double i3;
-                istringstream(s1) >> i1;    //Convert s2 to an integer
-                istringstream(s3) >> i3;
-                istringstream(s4) >> i4;
+                int iid, inum;
+                double dprice;
+                istringstream(sid) >> iid;    //Convert s2 to an double
+                istringstream(sprice) >> dprice;
+                istringstream(snum) >> inum;
 
-                product *newNode = new product{i1, s2, i3, i4, nullptr};
+                product *newNode = new product{iid, sname, dprice, inum, nullptr};
                 if (!head)
                 {
                     head = newNode;

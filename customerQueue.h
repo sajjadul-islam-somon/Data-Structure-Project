@@ -11,7 +11,8 @@ using namespace std;
 struct customer
 {
     string cname;
-    int cbill;
+    string cphone;
+    double cbill;
     customer *nextNode;
 } *front = nullptr, *rear = nullptr;
 
@@ -39,6 +40,8 @@ void display1stCustomer()
         gotoxy(20, 7);
         cout << "Customer at the front is : \" " << front->cname << " \" & Bill is : " << front->cbill << endl;
     }
+    system("pause");
+    system("cls");
 }
 
 void customerList()
@@ -51,33 +54,44 @@ void customerList()
     cout << "|                        Customer Queue                         |";
     gotoxy(15, 4);
     cout << "+---------------------------------------------------------------+";
+
     customer *temp = front;
-    int i = 1;
+    int yPos = 11;
 
     if (front == nullptr)
     {
         gotoxy(35, 7);
-        cout << "No Customer in Queue\n";
+        cout << "No Customer in Queue";
     }
     else
     {
-        for (i = 1; temp != nullptr; i++)
+        gotoxy(33, 7);
+        cout << "List of Customers in Queue";
+        gotoxy(22, 9);
+        cout << left;
+        cout << setw(5) << "SL" << setw(20) << "Customer Name" << setw(20) << "Phone Number" << setw(10) << "Bill";
+        gotoxy(21, 10);
+        cout << "=====================================================\n";
+        for (int i = 1; temp != nullptr; i++)
         {
-            gotoxy(30, 6 + i);
-            cout << "\t" << i << ". " << temp->cname << endl;
+            gotoxy(22, yPos);
+            cout << left;
+            cout << setw(5) << i << setw(20) << temp->cname << setw(20) << temp->cphone << setw(10) << temp->cbill;
             temp = temp->nextNode;
+            yPos++;
         }
     }
-    gotoxy(25, 7 + i);
+    gotoxy(30, yPos+2);
     system("pause");
     system("cls");
 }
 
-void enqueue(string customerName, int totalBill)
+void enqueue(string customerName, string customerPhone, double totalBill)
 {
     customer *newNode = new customer;
 
     newNode->cname = customerName;
+    newNode->cphone = customerPhone;
     newNode->cbill = totalBill;
     newNode->nextNode = nullptr;
 
@@ -87,7 +101,6 @@ void enqueue(string customerName, int totalBill)
     }
     else
     {
-        newNode->nextNode = nullptr;
         rear->nextNode = newNode;
         rear = newNode;
     }
@@ -152,7 +165,7 @@ void dequeue()
         gotoxy(25, 17);
         cout << "Successful Payment by Customer : " << temp->cname << endl;
         gotoxy(25, 18);
-        cout << "Bill Paid                       : " << temp->cbill << endl;
+        cout << "Bill Paid                      : " << temp->cbill << endl;
         gotoxy(40, 19);
         cout << "Thank You\n";
         delete temp;
@@ -181,7 +194,7 @@ void saveNewCustomerToFile(customer *temp)
     }
     else
     {
-        file << temp->cname << endl;
+        file << temp->cname << "," << temp->cphone << "," << temp->cbill << endl;
     }
     file.close();
 }
@@ -197,12 +210,12 @@ void saveAllCustomerToFile()
     {
         if (file.tellp() == 0)
         {
-            file << "Customer Name,Payment\n";
+            file << "Customer Name,Phone Number,Payment\n";
         }
         customer *temp = front;
         while (temp)
         {
-            file << temp->cname << endl;
+            file << temp->cname << "," << temp->cphone << "," << temp->cbill << endl;
             temp = temp->nextNode;
         }
     }
@@ -228,12 +241,12 @@ void loadCustomerFromFile()
                 continue;
             }
             istringstream ss(line);
-            string s1, s2;
-            if (getline(ss, s1, ',') && getline(ss, s2, ','))
+            string sname, sphone, sbill;
+            if (getline(ss, sname, ',') && getline(ss, sphone, ',') && getline(ss, sbill));
             {
-                int i2;
-                istringstream(s2) >> i2; // Convert s2 to an integer i2
-                customer *newNode = new customer{s1, i2, nullptr};
+                double dbill;
+                istringstream(sbill) >> dbill; // Convert s2 to an integer i2
+                customer *newNode = new customer{sname,sphone, dbill, nullptr};
                 if (front == nullptr)
                 {
                     front = rear = newNode;

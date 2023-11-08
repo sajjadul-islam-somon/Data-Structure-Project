@@ -161,14 +161,21 @@ void buyProduct()
     }
     else
     {
+    here:
         int number;
         cout << "\t\tHow many different products you wanna buy : ";
         cin >> number;
         int total = countProduct();
+        if (number > total)
+        {
+            cout << "\t\t\tSorry, Invalid Number of Products";
+            goto here;
+        }
         string products[total];
         int quantities[total];
 
-        int c = 0, bill = 0, totalBill = 0;
+        int c = 0;
+        double bill = 0, totalBill = 0;
 
         for (int i = 0; i < number; i++)
         {
@@ -220,10 +227,13 @@ void buyProduct()
                 cout << "No Product Found\n\n";
             }
         }
-        string customerName;
+        string customerName, customerPhone;
         cin.ignore();
-        cout << "Enter Your name : ";
+        cout << "\t\t\tEnter Your name : ";
         getline(cin, customerName);
+        cin.ignore();
+        cout << "\t\t\tEnter Phone No. : ";
+        cin >> customerPhone;
 
         system("cls");
 
@@ -246,7 +256,7 @@ void buyProduct()
         cout << "\t\t\tTotal sum of Bill : " << bill << endl;
         cout << "\t\t\tWith 10% Discount. Your Payable Bill is : " << totalBill << endl << endl;
         cout << "\t\t\t\tThank you for shopping here\n\n";
-        enqueue(customerName, totalBill);
+        enqueue(customerName, customerPhone, totalBill);
     }
     system("pause");
     system("cls");

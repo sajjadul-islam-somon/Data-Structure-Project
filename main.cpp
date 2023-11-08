@@ -9,9 +9,9 @@ using namespace std;
 #define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 //===========================================================================
-//============================Customer Function==============================
+//============================Cashier Function-==============================
 //===========================================================================
-void Customer()
+void Cashier()
 {
     system("cls");
     char choice;
@@ -20,21 +20,16 @@ void Customer()
         gotoxy(15, 2);
         cout << "+===============================================================+";
         gotoxy(15, 3);
-        cout << "|                         Customer Mode                         |";
+        cout << "|                         Cashier Mode                          |";
         gotoxy(15, 4);
         cout << "+===============================================================+";
-
-        gotoxy(40, 7);
-        cout << "1. Display All Products";
-        gotoxy(40, 8);
-        cout << "2. Search Products";
-        gotoxy(40, 9);
-        cout << "3. Buy Products";
-        gotoxy(40, 10);
-        cout << "4. Display Cart";
-        gotoxy(40, 11);
+        gotoxy(37, 7);
+        cout << "1. Customer List";
+        gotoxy(37, 8);
+        cout << "2. Customer Check Out";
+        gotoxy(40, 13);
         cout << "<-- Go Back";
-        gotoxy(25, 17);
+        gotoxy(30, 17);
         cout << "Enter Valid Key . . . ";
 
         choice = getch();
@@ -42,94 +37,10 @@ void Customer()
         switch (choice)
         {
         case '1':
-            displayProduct();
-            system("pause");
-            system("cls");
-            break;
-        case '2':
-            searchProduct();
-            break;
-        case '3':
-            cCart();
-            buyProduct();
-            break;
-        case '4':
-            displayCart();
-            break;
-        case 8:
-            system("cls");
-            break;
-
-        default:
-            gotoxy(30, 20);
-            cout << "Please Enter Valid Input." << endl;
-            break;
-        }
-    } while (choice != 8);
-}
-
-//===========================================================================
-//=============================Manager Function==============================
-//===========================================================================
-
-
-void Manager()
-{
-    system("cls");
-    char choice;
-    do
-    {
-        gotoxy(15, 2);
-        cout << "+===============================================================+";
-        gotoxy(15, 3);
-        cout << "|                         Manager Mode                          |";
-        gotoxy(15, 4);
-        cout << "+===============================================================+";
-
-        gotoxy(40, 7);
-        cout << "1. Add New";
-        gotoxy(40, 8);
-        cout << "2. Display All";
-        gotoxy(40, 9);
-        cout << "3. Modify Product";
-        gotoxy(40, 10);
-        cout << "4. Delete Product";
-        gotoxy(40, 11);
-        cout << "5. Customer List";
-        gotoxy(40, 12);
-        cout << "6. Customer Done";
-        gotoxy(40, 14);
-        cout << "<-- Go Back";
-        gotoxy(25, 17);
-        cout << "Enter Valid Key. . . ";
-        
-        choice = getch();
-
-        switch (choice)
-        {
-        case '1':
-            addProduct();
-            break;
-
-        case '2':
-            displayProduct();
-            system("pause");
-            system("cls");
-            break;
-
-        case '3':
-            modifyProduct();
-            break;
-
-        case '4':
-            deleteProduct();
-            break;
-
-        case '5':
             customerList();
             break;
 
-        case '6':
+        case '2':
             dequeue();
             break;
 
@@ -138,21 +49,23 @@ void Manager()
             break;
 
         default:
-            gotoxy(30, 20);
-            cout << "\tSorry Please, Enter valid input " << endl;
+            gotoxy(35, 20);
+            cout << "Please Enter Valid Input." << endl;
             break;
         }
+
     } while (choice != 8);
+    
 }
 
-void Login()
+void cashierLogin()
 {
     system("cls");
 
     gotoxy(15, 2);
     cout << "+---------------------------------------------------------------+";
     gotoxy(15, 3);
-    cout << "|                          Admin Login                          |";
+    cout << "|                         Cashier Login                         |";
     gotoxy(15, 4);
     cout << "+---------------------------------------------------------------+";
 
@@ -190,7 +103,204 @@ void Login()
         }
 
     }
-    if (username == "admin" && password == "1")
+    if (username == "admin" && password == "123")
+    {
+        gotoxy(30, 14);
+        cout << "Login Susscessfull . . .\n";
+        loadingBar();
+        Cashier();
+    }
+    else 
+    {
+        gotoxy(30, 14);
+        cout << "Wrong Username or Password . . .\n\n";
+        gotoxy(30, 15);
+        cout << "Your entered Password :  " << password << endl;
+        gotoxy(30, 20);
+        system("pause");
+        cashierLogin();
+    }
+}
+
+//===========================================================================
+//============================Customer Function==============================
+//===========================================================================
+void Customer()
+{
+    system("cls");
+    char choice;
+    do
+    {
+        gotoxy(15, 2);
+        cout << "+===============================================================+";
+        gotoxy(15, 3);
+        cout << "|                         Customer Mode                         |";
+        gotoxy(15, 4);
+        cout << "+===============================================================+";
+
+        gotoxy(37, 7);
+        cout << "1. Display All Products";
+        gotoxy(37, 8);
+        cout << "2. Search Products";
+        gotoxy(37, 9);
+        cout << "3. Buy Products";
+        gotoxy(37, 10);
+        cout << "4. Display Cart";
+        gotoxy(40, 13);
+        cout << "<-- Go Back";
+        gotoxy(30, 17);
+        cout << "Enter Valid Key . . . ";
+
+        choice = getch();
+
+        switch (choice)
+        {
+        case '1':
+            displayProduct();
+            system("pause");
+            system("cls");
+            break;
+
+        case '2':
+            searchProduct();
+            break;
+
+        case '3':
+            cCart();
+            buyProduct();
+            break;
+
+        case '4':
+            displayCart();
+            break;
+
+        case 8:
+            system("cls");
+            break;
+
+        default:
+            gotoxy(35, 20);
+            cout << "Please Enter Valid Input." << endl;
+            break;
+        }
+    } while (choice != 8);
+}
+
+//===========================================================================
+//=============================Manager Function==============================
+//===========================================================================
+void Manager()
+{
+    system("cls");
+    char choice;
+    do
+    {
+        gotoxy(15, 2);
+        cout << "+===============================================================+";
+        gotoxy(15, 3);
+        cout << "|                         Manager Mode                          |";
+        gotoxy(15, 4);
+        cout << "+===============================================================+";
+
+        gotoxy(37, 7);
+        cout << "1. Add New";
+        gotoxy(37, 8);
+        cout << "2. Display All";
+        gotoxy(37, 9);
+        cout << "3. Modify Product";
+        gotoxy(37, 10);
+        cout << "4. Delete Product";
+        gotoxy(37, 11);
+        cout << "5. Customer List";
+        gotoxy(40, 13);
+        cout << "<-- Go Back";
+        gotoxy(30, 17);
+        cout << "Enter Valid Key. . . ";
+
+        choice = getch();
+
+        switch (choice)
+        {
+        case '1':
+            addProduct();
+            break;
+
+        case '2':
+            displayProduct();
+            system("pause");
+            system("cls");
+            break;
+
+        case '3':
+            modifyProduct();
+            break;
+
+        case '4':
+            deleteProduct();
+            break;
+
+        case '5':
+            customerList();
+            break;
+
+        case 8:
+            system("cls");
+            break;
+
+        default:
+            gotoxy(35, 20);
+            cout << "Please, Enter valid input " << endl;
+            break;
+        }
+    } while (choice != 8);
+}
+
+void managerLogin()
+{
+    system("cls");
+
+    gotoxy(15, 2);
+    cout << "+---------------------------------------------------------------+";
+    gotoxy(15, 3);
+    cout << "|                         Manager Login                         |";
+    gotoxy(15, 4);
+    cout << "+---------------------------------------------------------------+";
+
+    gotoxy(32, 7);
+    cout << "Login . . . . . . . . . . . . . .";
+    gotoxy(32, 8);
+    cout << "`````````````````````````````````";
+    string username, password;
+    gotoxy(30, 10);
+    cout << "Admin-Username : ";
+    cin >> username;
+
+    gotoxy(30, 11);
+    cout << "Password       : ";
+    char ch;
+    while (1)
+    {
+        ch = getch();
+        if (ch == 13)
+        {
+            break;
+        }
+        if (ch == 8)
+        {
+            if (!password.empty())
+            {
+                password.pop_back();
+                cout << "\b \b";
+            }
+        }
+        else 
+        {
+            password.push_back(ch);
+            cout << "*";
+        }
+
+    }
+    if (username == "admin" && password == "123")
     {
         gotoxy(30, 14);
         cout << "Login Susscessfull . . .\n";
@@ -205,15 +315,13 @@ void Login()
         cout << "Your entered Password :  " << password << endl;
         gotoxy(30, 20);
         system("pause");
-        Login();
+        managerLogin();
     }
 }
-
 
 //===========================================================================
 //===============================Main Function===============================
 //===========================================================================
-
 int main()
 {
     system("cls");
@@ -269,10 +377,12 @@ int main()
         cout << "+===============================================================+";
 
         gotoxy(40, 7);
-        cout << "1. manager" << endl;
+        cout << "1. Manager" << endl;
         gotoxy(40, 8);
-        cout << "2. customer" << endl;
-        gotoxy(35, 10);
+        cout << "2. Customer" << endl;
+        gotoxy(40, 9);
+        cout << "3. Cashier" << endl;
+        gotoxy(35, 11);
         cout << "Press \"ESC\" to Exit  [->" << endl;
         gotoxy(25, 17);
         cout << "Enter Valid Key . . . ";
@@ -282,11 +392,15 @@ int main()
         switch (choice)
         {
         case '1':
-            Login();
+            managerLogin();
             break;
 
         case '2':
             Customer();
+            break;
+
+        case '3':
+            cashierLogin();
             break;
 
         case 27:

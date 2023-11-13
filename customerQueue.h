@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
+#include "animation.h"
 
 #ifndef customerQueue
 #define customerQueue
 
 using namespace std;
-#define fastio                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 struct customer
 {
@@ -20,28 +19,16 @@ void saveNewCustomerToFile(customer *temp);
 void saveAllCustomerToFile();
 void loadCustomerFromFile();
 
-void display1stCustomer()
+int countCustomer()
 {
-    system("cls");
-
-    gotoxy(15, 2);
-    cout << "+---------------------------------------------------------------+";
-    gotoxy(15, 3);
-    cout << "|                         1st Customer                          |";
-    gotoxy(15, 4);
-    cout << "+---------------------------------------------------------------+";
-    if (front == nullptr)
+    customer *temp = front;
+    int i = 0;
+    while (temp)
     {
-        gotoxy(20, 7);
-        cout << "No Customer in Queue" << endl;
+        i++;
+        temp = temp->nextNode;
     }
-    else
-    {
-        gotoxy(20, 7);
-        cout << "Customer at the front is : \" " << front->cname << " \" & Bill is : " << front->cbill << endl;
-    }
-    system("pause");
-    system("cls");
+    return i;
 }
 
 void customerList()
@@ -210,7 +197,7 @@ void saveAllCustomerToFile()
     {
         if (file.tellp() == 0)
         {
-            file << "Customer Name,Phone Number,Payment\n";
+            file << "Name,Phone Number,Payment\n";
         }
         customer *temp = front;
         while (temp)
@@ -245,7 +232,7 @@ void loadCustomerFromFile()
             if (getline(ss, sname, ',') && getline(ss, sphone, ',') && getline(ss, sbill));
             {
                 double dbill;
-                istringstream(sbill) >> dbill; // Convert s2 to an integer i2
+                istringstream(sbill) >> dbill; // Convert string to an double
                 customer *newNode = new customer{sname,sphone, dbill, nullptr};
                 if (front == nullptr)
                 {

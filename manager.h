@@ -5,9 +5,7 @@
 #define manager
 
 using namespace std;
-#define fastio                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 
 struct product
 {
@@ -40,9 +38,6 @@ int countProduct()
     return i;
 }
 
-//=================================================================
-//========================= Count Product =========================
-//=================================================================
 void deleteList()
 {
     //Clear List
@@ -56,6 +51,9 @@ void deleteList()
     head = nullptr;     //indicate an empty list
 }
 
+//=================================================================
+//========================== Add Product ==========================
+//=================================================================
 void addProduct()
 {
     system("cls");
@@ -89,9 +87,9 @@ void addProduct()
 
     saveNewProductToFile(newNode);
 
+    newNode->next = nullptr;
     if (head == nullptr)
     {
-        newNode->next = nullptr;
         head = newNode;
     }
     else
@@ -100,7 +98,6 @@ void addProduct()
         {
             temp = temp->next;
         }
-        newNode->next = nullptr;
         temp->next = newNode;
     }
     gotoxy(25, 14);
@@ -110,6 +107,9 @@ void addProduct()
     system("cls");
 }
 
+//=================================================================
+//======================= Display Products ========================
+//=================================================================
 void displayProduct()
 {
     system("cls");
@@ -156,6 +156,9 @@ void displayProduct()
     }
 }
 
+//=================================================================
+//======================== Modify Product =========================
+//=================================================================
 void modifyProduct()
 {
     system("cls");
@@ -228,6 +231,9 @@ void modifyProduct()
     system("cls");
 }
 
+//=================================================================
+//======================== Delete Product =========================
+//=================================================================
 void deleteProduct()
 {
     system("cls");
@@ -269,9 +275,36 @@ void deleteProduct()
                 cout << setw(15) << temp->proId << setw(30) << temp->proName << setw(15) << temp->proPrice << setw(10) << temp->proNum << endl;
                 gotoxy(25, 13);
                 cout << "Are sure!!! You want to delete \" " << temp->proName << " \" \n";
-                gotoxy(30, 21);
-                system("pause");
-                break;
+                gotoxy(30, 15);
+                cout << "[Enter]";
+                gotoxy(60, 15);
+                cout << "[Cancel]";
+            inputagain:
+                char input = getch();
+                if (input == 8)
+                {
+                    gotoxy(30, 17);
+                    cout << "You have canceled Deletion of \" " << temp->proName << " \" \n";
+                    for (int i = 3; i >= 0; i--)
+                    {
+                        Sleep(500);
+                        gotoxy(45, 20);
+                        cout << "===" << i << "===";
+                        Sleep(500);
+                        gotoxy(45, 20);
+                        cout << "---" << " " << "---";
+                    }
+                    system("cls");
+                    return;
+                }
+                else if (input == 13)
+                {
+                    break;
+                }
+                else 
+                {
+                    goto inputagain;
+                }
             }
             temp = temp->next;
         }
@@ -379,9 +412,9 @@ void loadProductFromFile()
             {
                 int iid, inum;
                 double dprice;
-                istringstream(sid) >> iid;    //Convert s2 to an double
-                istringstream(sprice) >> dprice;
-                istringstream(snum) >> inum;
+                istringstream(sid) >> iid;          //Convert string to integer
+                istringstream(sprice) >> dprice;    //Convert string to double
+                istringstream(snum) >> inum;        //Convert string to integer
 
                 product *newNode = new product{iid, sname, dprice, inum, nullptr};
                 if (!head)

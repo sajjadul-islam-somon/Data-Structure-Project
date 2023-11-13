@@ -62,12 +62,6 @@ void loadingBar()
         gotoxy(35, 20);
         cout << "Loading . . . " << percent << " %";
         Sleep(20);
-        // Clear any remaining characters in the loading bar
-        // for (int i = barLength; i < length; i++)
-        // {
-        //     gotoxy(loadStart + i, 18);
-        //     printf(" ");
-        // }
     }
 }
 

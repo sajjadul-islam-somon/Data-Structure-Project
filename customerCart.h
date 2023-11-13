@@ -9,27 +9,11 @@
 using namespace std;
 #define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-struct cart
-{
-    int num;
-    cart *link;
-} *top;
+const int totalCart = 50;
 
-void push(int cartNum)
-{
-    cart *newNode = new cart;
-
-    if (!newNode)
-    {
-        cout << "Heap Overflow" << endl;
-        return;
-    }
-
-    newNode->num = cartNum;
-    newNode->link = top;
-    top = newNode;
-}
-
+//=================================================================
+//============================= Cart ==============================
+//=================================================================
 void cCart()
 {
     system("cls");
@@ -47,26 +31,27 @@ void cCart()
     gotoxy(35, 11);
     cout << "Please Grab a Cart \\_/`";
 
-    cart *temp = top;
-
-    if (top == nullptr)
+    int totalCustomer = countCustomer();
+    int remainCart = totalCart - totalCustomer;
+    if (remainCart == 0)
     {
         gotoxy(35, 13);
-        cout << "Carts Not Available Now" << endl; // Stack Underflow
+        cout << "Cart Not Available Now" << endl;
     }
-    else
+    else 
     {
+        int cartNum = remainCart;
         gotoxy(35, 13);
-        cout << "Your Cart Number is : " << top->num << endl;
-        top = top->link;
-        top->link = nullptr;
-        delete temp;
+        cout << "Your Cart Number is : " << cartNum << endl;
     }
     gotoxy(30, 21);
     system("pause");
     system("cls");
 }
 
+//=================================================================
+//========================= Display Cart ==========================
+//=================================================================
 void displayCart()
 {
     system("cls");
@@ -77,19 +62,21 @@ void displayCart()
     cout << "|                         Display Cart                          |";
     gotoxy(15, 4);
     cout << "+---------------------------------------------------------------+";
-    cart *temp = top;
 
-    if (top == nullptr)
+    int totalCustomer = countCustomer();
+    int remainCart = totalCart - totalCustomer;
+    if (remainCart == 0)
     {
-        gotoxy(35, 7);
-        cout << "Carts Not Available Now" << endl; // Stack Underflow
+        gotoxy(35, 13);
+        cout << "Cart Not Available Now" << endl;
     }
-    else
+    else 
     {
         gotoxy(25, 7);
         cout << "Existing carts are : ";
         int xPos = 30, yPos = 9;
-        for (int i = 0; temp != nullptr; i++)
+        int j = remainCart;
+        for (int i = 0; i < remainCart; i++)
         {
             if (i == 10 || i == 20 || i == 30 || i == 40 || i == 50)
             {
@@ -97,8 +84,7 @@ void displayCart()
                 yPos -= 10;
             }
             gotoxy(xPos, yPos + i);
-            cout << temp->num;
-            temp = temp->link;
+            cout << j--;
         }
     }
     gotoxy(30, 21);
@@ -106,6 +92,9 @@ void displayCart()
     system("cls");
 }
 
+//=================================================================
+//======================== Search Product =========================
+//=================================================================
 void searchProduct()
 {
     system("cls");
@@ -119,14 +108,17 @@ void searchProduct()
     gotoxy(15, 4);
     cout << "+---------------------------------------------------------------+";
 
-    int id;
+    string name;
     gotoxy(20, 7);
-    cout << "Enter Product's ID : ";
-    cin >> id;
+    cout << "Product Name is Case Sencetive";
+    gotoxy(20, 7);
+    // cin.ignore();
+    cout << "Enter Product's Name : ";
+    getline(cin, name);
 
     while (temp != nullptr)
     {
-        if (temp->proId == id)
+        if (temp->proName == name)
         {
             gotoxy(12, 9);
             cout << left;
@@ -150,6 +142,9 @@ void searchProduct()
     system("cls");
 }
 
+//=========================================================================
+//=========================== Buy Product =================================
+//=========================================================================
 void buyProduct()
 {
     system("cls");

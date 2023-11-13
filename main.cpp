@@ -285,10 +285,10 @@ void customerSignup()
 
     gotoxy(15, 6);
     cout << "Signing Up New Customer . . .";
+    cin.ignore();
 
     gotoxy(30, 8);
     cout << "Full Name          : ";
-    cin.ignore();
     getline(cin, newUser->lname);
     gotoxy(30, 9);
     cout << "Phone Number       : ";
@@ -305,7 +305,7 @@ void customerSignup()
     newUser->linker = nullptr;
     if (first == nullptr)
     {
-        first == newUser;
+        first = newUser;
     }
     else
     {

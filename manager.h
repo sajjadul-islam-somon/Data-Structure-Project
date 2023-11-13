@@ -69,7 +69,7 @@ void addProduct()
     newNode = new product; // new mamory allocation & object creation
 
     gotoxy(15, 6);
-    cout << "Enter Product Info:";
+    cout << "Enter Product Info . . .";
 
     gotoxy(20, 8);
     cout << "Product Name     : ";

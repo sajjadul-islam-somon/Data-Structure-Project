@@ -110,10 +110,8 @@ void searchProduct()
 
     string name;
     gotoxy(20, 7);
-    cout << "Product Name is Case Sencetive";
-    gotoxy(20, 7);
-    // cin.ignore();
     cout << "Enter Product's Name : ";
+    cin.ignore();
     getline(cin, name);
 
     while (temp != nullptr)
